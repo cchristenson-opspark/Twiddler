@@ -4,12 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Twiddler!</title>
+    <title>An Extremely Dope Twiddler Page</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
     <script src="data-generator.js"></script>
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <div class="header">
+      <h1>Twiddler</h1>
+      <p>A nice place to put your thumbs</p>
+    </div>
   </head>
   <body>
+    <div id="sidebar" class="sidebar">
+      <button type="button" class="button" id="refresh">
+        See what you've <br /> missed!
+      </button>
+      <form id="you-twiddle-form">
+        <input type="text" id="you-name" placeholder="What's your name?"><br>
+        <input type="text" id="you-twiddle" placeholder="What's your Twiddle?"/>
+        <button type="button" id="post-button">Twiddle!</button>
+      </form>
+    </div>
+    <div id="feed" class="feed"></div>
+   <script>
+     window.onbeforeunload = function () {
+  window.scrollTo(0,0);
+};
+
+$(document).ready(() => {
+  jQuery("time.timeago").timeago();
+  newT(streams.home);
+  function newT(arr){
+    $("#feed").empty();
+    let i = arr.length - 1;
+    while (i >= 0){
+      let pic;
+      const tweet = arr[i]
+      const $tweet = $('<div id="tweet" class="tweet"></div>');
+      if(Object.keys(streams.users).slice(0, 4).includes(tweet.user)){
+         pic = `<img src="pix/${tweet.user}.jpg" class="avatars" height="70" width="70"/>`
+      } else {
+         pic = `<img src="pix/you.jpg" class="avatars" height="70" width="70"/>`
+      }
+      $tweet.append(`${pic}<h2 id="userName" class="userName${tweet.user}">@${tweet.user}:</h2>
+      <p id="twiddle" class="twiddles"> ${tweet.message} </p>
+      <div id="timeAgo" class="timeStamp">${jQuery.timeago(tweet.created_at)}</div>`).appendTo("#feed")
+      i -= 1;
+
+      $('.userName' + tweet.user).on('click', function () {
+        return newT(streams.users[tweet.user])
+      })
+    }
+  }
+  $('#refresh').click(() => {
+    newT(streams.home)
+  });
+  $("#post-button").click(() => {
+    const visitor = $("#you-name").val() 
+    if(streams.users[visitor] === undefined){
+      streams.users[visitor] = []; 
+    }
+    const writeTweet = (message) => {
+  if (!visitor){
+    throw new Error('Set the global visitor property!');
+  }
+
+  const tweet = {
+    user: visitor,
+    message: message,
+    created_at: new Date
+  };
+  addTweet(tweet)
+};
+    writeTweet($("#you-twiddle").val())
+    newT(streams.home);
+  })
+});
+   </script>
   </body>
 </html>

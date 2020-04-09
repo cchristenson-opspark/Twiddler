@@ -1,0 +1,74 @@
+*{
+  font-family: Arial, Helvetica, sans-serif;
+letter-spacing: 0.6px;
+word-spacing: 1.2px;
+font-weight: normal;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+}
+.twiddles {
+  font-size: 12px;
+  color: white;
+}
+
+.header {
+  padding: 40px;
+  text-align: center;
+  background: #2c363883;
+  color: black;
+  font-size: 20px;
+}
+div.header p {
+  color : white 
+}
+.sidebar{
+  position: fixed;
+  align-items: left;
+  width: 10.5vw;
+  height: 100%;
+}
+#sidebar{
+  
+  background-color: rgb(251, 241, 223, 0.5);
+}
+.feed{
+  margin-left: 10vw;
+  padding: 0px 10px;
+}
+
+.userName{
+  float: left;
+  margin-left: 1.5vw;
+}
+
+h2:hover{
+  font-size: 1.65em;
+  color: rgb(0, 255, 213);
+  cursor: pointer;
+}
+body{
+background-color: #D0E4F5;
+background-image: url("http://res.publicdomainfiles.com/pdf_view/67/13925208618655.png");
+background-repeat: repeat;
+background-attachment: fixed;
+background-position: 50% 50%;
+}
+.tweet{
+  outline: 6px double rgba(32,31,31,0.74);
+outline-offset: 2px;
+background: #1d2425ab;
+}
+.twiddle{
+  margin-left: 4vw;
+  padding-top: 1vh;
+  font-size: 1.5em;
+  margin-bottom: .5vh;
+  color: white;
+}
+.timeStamp{
+  color: rgba(209, 209, 209, 0.87);
+  margin-left: 3vw;
+  margin-bottom: .3vh;
+}

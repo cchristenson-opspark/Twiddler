@@ -52,6 +52,7 @@ const generateRandomTweet = () => {
     message: randomMessage(),
     created_at: new Date(),
   };
+  // $('tweets').prepend(`<p>@${tweet.user}: ${tweet.message} || Date: ${tweet.created_at.toLocaleDateString()} Time: ${tweet.created_at.toLocaleTimeString()}</p>`);
   addTweet(tweet);
 };
 
@@ -65,18 +66,22 @@ const scheduleNextTweet = () => {
 };
 scheduleNextTweet();
 
+
 // Utility function for letting students add "write a tweet" functionality
 // (NOTE: Not used by the rest of this file.)
-const writeTweet = (message) => {
-  const visitor = window.visitor;
+// const writeTweet = (message) => {
+//   const visitor = $("#you-name").val() 
+//   if (!visitor){
+//     throw new Error('Set the global visitor property!');
+//   }
 
-  if (!visitor){
-    throw new Error('Set the global visitor property!');
-  }
-
-  const tweet = {
-    user: visitor,
-    message: message,
-  };
-  addTweet(tweet);
-};
+//   const tweet = {
+//     user: visitor,
+//     message: message,
+//     created_at: new Date
+//   };
+//   addTweet(tweet)
+// };
+// window.streams = streams;
+// window.users = users;
+// window.writeTweet = writeTweet;
