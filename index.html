@@ -10,30 +10,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.7/jquery.timeago.min.js"></script>
     <script src="data-generator.js"></script>
     <!-- <script src="index.js"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <div class="header">
-      <h1>Twiddler</h1>
-      <p>A nice place to put your thumbs</p>
-    </div>
+    
   </head>
   <body>
-    <div id="sidebar" class="sidebar">
-      <button type="button" class="button" id="refresh">
-        See what you've <br /> missed!
+    
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="header">
+        <h1>Twiddler</h1>
+        <p>A nice place to put your thumbs</p>
+      </div>
+      <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <form id="you-twiddle-form">
-        <input type="text" id="you-name" placeholder="What's your name?"><br>
-        <input type="text" id="you-twiddle" placeholder="What's your Twiddle?"/>
-        <button type="button" id="post-button">Twiddle!</button>
-      </form>
-    </div>
+      <div id="navbarMenu"class="collapse navbar-collapse">
+        <button type="button" class="button" id="refresh">
+          New Twiddles!
+        </button>
+        <form id="you-twiddle-form" class="nav-link">
+          <input type="text" id="you-name" placeholder="What's your name?"><br>
+          <input type="text" id="you-twiddle" placeholder="What's your Twiddle?"/>
+          <button type="button" id="post-button">Twiddle!</button>
+        </form>
+      </div>
+    </nav>
     <div id="feed" class="feed"></div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
    <script>
-     window.onbeforeunload = function () {
+  window.onbeforeunload = function () {
   window.scrollTo(0,0);
 };
-
-$(document).ready(() => {
+  $(document).ready(() => {
   jQuery("time.timeago").timeago();
   newT(streams.home);
   function newT(arr){
