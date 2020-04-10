@@ -10,6 +10,14 @@
   padding: 10px 20px;
   margin: 10px auto;
 }
+#refresh:hover {
+  color: rgba(159, 211, 246, 0.705);
+  cursor: pointer;
+}
+#post-button:hover {
+  color: rgba(159, 211, 246, 0.705);
+  cursor: pointer;
+} 
 
 #you-twiddle-form{
   position: relative;
@@ -52,3 +60,9 @@
   position: relative;
   font-size: 15px
 }  
+h2:hover{
+  font-size: 1.65em;
+  color: rgba(159, 211, 246, 0.705);
+  cursor: pointer;
+}
+
