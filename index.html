@@ -41,42 +41,61 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
    <script>
+  //each time page is reloaded, reset at top of feed
   window.onbeforeunload = function () {
   window.scrollTo(0,0);
 };
-  $(document).ready(() => {
+//document ready function to run on page load  
+$(document).ready(() => {
+  //load timestamp app
   jQuery("time.timeago").timeago();
+  //call function to display tweets
   newT(streams.home);
+  //tweet writer function
   function newT(arr){
+    //to begin, clear the feed so the timing will make sense
     $("#feed").empty();
+    //set numeral container for feed length
     let i = arr.length - 1;
+    //loop through array of tweets
     while (i >= 0){
+      //make containers for pic
       let pic;
+      //for tweet object
       const tweet = arr[i]
+      //for tweet compiler
       const $tweet = $('<div id="tweet" class="tweet"></div>');
+      //determine if user has relevant image, if user is a guest, supply guest image
       if(Object.keys(streams.users).slice(0, 4).includes(tweet.user)){
          pic = `<img src="pix/${tweet.user}.jpg" class="avatars" height="70" width="70"/>`
       } else {
          pic = `<img src="pix/you.jpg" class="avatars" height="70" width="70"/>`
       }
+      //append data from tweet container adding styling
       $tweet.append(`${pic}<h2 id="userName" class="userName${tweet.user}">@${tweet.user}:</h2>
       <p id="twiddle" class="twiddles"> ${tweet.message} </p>
       <div id="timeAgo" class="timeStamp">${jQuery.timeago(tweet.created_at)}</div>`).appendTo("#feed")
+      //reduce length count by one
       i -= 1;
-
+      //click function to sort feed by user
       $('.userName' + tweet.user).on('click', function () {
         return newT(streams.users[tweet.user])
       })
     }
   }
+  //get new content button function
   $('#refresh').click(() => {
     newT(streams.home)
   });
+  //user tweet click function
   $("#post-button").click(() => {
+    //gather data from form
     const visitor = $("#you-name").val() 
+    //if user hasn't tweeted before, add them to users 
     if(streams.users[visitor] === undefined){
       streams.users[visitor] = []; 
     }
+    //write tweet based on user data
     const writeTweet = (message) => {
   if (!visitor){
     throw new Error('Set the global visitor property!');
@@ -89,11 +108,11 @@
   };
   addTweet(tweet)
 };
+  //call write function 
     writeTweet($("#you-twiddle").val())
+  //call new content function to display new user tweet
     newT(streams.home);
   })
-
-  //this is a new comment new comment
 });
    </script>
   </body>
